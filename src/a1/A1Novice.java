@@ -22,20 +22,23 @@ public class A1Novice {
 		
 	// Creates an object of the customers and saves their last name, 
 	// first name char, and customer number, as well as putting their items in the "list" (Item[])
-//		custArray[0] = new Customer(scan.next().charAt(0), scan.next(), scan.nextInt());
+	//	custArray[0] = new Customer(scan.next().charAt(0), scan.next(), scan.nextInt());
+		
 		for(int i = 0; i < customers; i++) {
 			custArray[i] = new Customer(scan.next().charAt(0), scan.next(), scan.nextInt());
 				for (int o = 0; o < custArray[i].custNum; o++) {
 					custArray[i].list[o] = new Item(scan.nextInt(), scan.next(), scan.nextDouble());
 				}
 		}
-		
+	// Totaled up all the prices and amount purchased and saved the totals in another array
+	// that the indices correspond with the custNum.
 		for (int i = 0; i < customers; i++) {
 			for (int o = 0; o < custArray[i].custNum; o++) {
 				totals[i] = totals[i] + (custArray[i].list[o].price * custArray[i].list[o].amount);
 			}
 		}
-	
+	// Printing out the first char of their first name concatenated with their last name
+	// and their total from the "totals" array.
 		for (int i = 0; i < customers; i++ ) {
 			System.out.println(custArray[i].fName + ". " + custArray[i].lName + ": " + totals[i]);
 		}
@@ -64,35 +67,24 @@ public class A1Novice {
 		
 	}
 	
-	// The class for the items that they buy, which 
+	// The class for the items that they buy, which lets me keep the name and price
+	// together
 	
 	public static class Item {
 		String name;
 		double price;
 		int amount;
 		
-		
+	// Constructor for the items.	
 		Item( int c, String a, double b) {
 			this.name = a;
 			this.price = b;
 			this.amount = c;
 		}
 	}
+
+	// Contains the first char, last name, customer number,
+	// which is what's given in the inputs.
 	
-	// Method created to make customers from inputs received by the scanners.
-	// Contains the first char, last name, customer number, which is what's given in the inputs.
-	
-	static Customer custMaker() {
-		Scanner scan = new Scanner(System.in);
-		char fName = scan.nextLine().charAt(0);
-		String lName = scan.nextLine();
-		int num = scan.nextInt();
-		Customer cust = new Customer(fName, lName, num);
-		cust.list = new Item[num];
-		scan.close();
-		
-		return cust;
-		
-	}
 	
 }
