@@ -1,5 +1,6 @@
 package a1;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class A1Novice {
@@ -7,6 +8,8 @@ public class A1Novice {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
+		
+		DecimalFormat df = new DecimalFormat("0.00");
 
 		// Your code follows here.
 		
@@ -26,6 +29,7 @@ public class A1Novice {
 		
 		for(int i = 0; i < customers; i++) {
 			custArray[i] = new Customer(scan.next().charAt(0), scan.next(), scan.nextInt());
+			custArray[i].list = new Item[custArray[i].custNum];
 				for (int o = 0; o < custArray[i].custNum; o++) {
 					custArray[i].list[o] = new Item(scan.nextInt(), scan.next(), scan.nextDouble());
 				}
@@ -37,10 +41,11 @@ public class A1Novice {
 				totals[i] = totals[i] + (custArray[i].list[o].price * custArray[i].list[o].amount);
 			}
 		}
+		
 	// Printing out the first char of their first name concatenated with their last name
 	// and their total from the "totals" array.
 		for (int i = 0; i < customers; i++ ) {
-			System.out.println(custArray[i].fName + ". " + custArray[i].lName + ": " + totals[i]);
+			System.out.println(custArray[i].fName + ". " + custArray[i].lName + ": " + df.format(totals[i]));
 		}
 		
 		
@@ -56,7 +61,7 @@ public class A1Novice {
 		char fName;
 		String lName;
 		int custNum;
-		Item[] list = new Item[3];
+		Item[] list = new Item[custNum];
 		
 		Customer( char a, String b, int c) {
 			this.fName = a;
@@ -73,7 +78,7 @@ public class A1Novice {
 	public static class Item {
 		String name;
 		double price;
-		int amount;
+		double amount;
 		
 	// Constructor for the items.	
 		Item( int c, String a, double b) {

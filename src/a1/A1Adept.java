@@ -1,6 +1,7 @@
 package a1;
 
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 // import a1.A1Novice.Item;
 
@@ -11,6 +12,8 @@ public class A1Adept {
 		Scanner scan = new Scanner(System.in);
 
 		// Your code follows here.
+		
+		DecimalFormat df = new DecimalFormat("0.00");
 		
 		// Amount of items that can be purchased, IE the menu length
 		int length = scan.nextInt();
@@ -32,6 +35,9 @@ public class A1Adept {
 		// arrays for each name and quantity bought by each customer.
 		for (int i = 0; i < customers; i++) {
 			custArray[i] = new Customer(scan.next(), scan.next(), scan.nextInt());
+			custArray[i].list = new Item[custArray[i].custNum];
+			custArray[i].quant = new int[custArray[i].custNum];
+			custArray[i].names = new String[custArray[i].custNum];
 			for (int o = 0; o < custArray[i].custNum; o++) {
 				custArray[i].quant[o] = scan.nextInt();
 				custArray[i].names[o] = scan.next();
@@ -63,7 +69,13 @@ public class A1Adept {
 		//Created the objects to save the average cost, the biggest total customer and smallest
 		// total customer, added arguments for the constructors that also signal if the scanner
 		// isn't picking up the information that the input is giving.
-		double Average = (custArray[0].total + custArray[1].total + custArray[2].total) / 3;
+		
+		double Average = 0;
+		for (int i = 0; i < custArray.length; i++) {
+			Average = Average + custArray[i].total;
+		}
+		Average = Average/custArray.length;
+		
 		Customer Biggest = new Customer("B", "B", 0);
 		Biggest.total = 0;
 		Customer Smallest = new Customer("S", "S", 0);
@@ -88,10 +100,10 @@ public class A1Adept {
 		
 		// Print statements for each of the lines needed, IE Biggest, Smallest, Average.
 		System.out.println("Biggest: " + Biggest.fName + " " + Biggest.lName 
-				+ "(" + Biggest.total + ")");
+				+ "(" + df.format(Biggest.total) + ")");
 		System.out.println("Smallest: " + Smallest.fName + " " + Smallest.lName +
-				"(" + Smallest.total + ")");
-		System.out.println("Average: " + Average);
+				"(" + df.format(Smallest.total) + ")");
+		System.out.println("Average: " + df.format(Average));
 		
 		
 		
@@ -99,6 +111,7 @@ public class A1Adept {
 		
 		scan.close();
 	}
+	
 	
 	// Class for items, contains a name, price, and amount bought.
 	public static class Item {
@@ -113,15 +126,15 @@ public class A1Adept {
 		}
 	}
 	
-	//Class for customers, contains fname, lname, and their customer number, along with
+	//Class for customers, contains first name, last name, and their customer number, along with
 	// a list of items that they are buying.
 	public static class Customer {
 		String fName;
 		String lName;
 		int custNum;
-		Item[] list = new Item[3];
-		int[] quant = new int[3];
-		String[] names = new String[3];
+		Item[] list = new Item[custNum];
+		int[] quant = new int[custNum];
+		String[] names = new String[custNum];
 		double total;
 		
 		Customer( String a, String b, int c) {
