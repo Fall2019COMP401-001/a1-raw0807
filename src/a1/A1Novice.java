@@ -10,5 +10,89 @@ public class A1Novice {
 
 		// Your code follows here.
 		
+		int customers = scan.nextInt();
+		//System.out.println(customers + " Customers in line. Please enter the first Customer's"
+		// + " name, first and last, along with their customer ID");
+		
+		// Created an array to hold the customer classes, the customers and their orders, and the
+		// total of their orders in terms of price. All indices correspond with their customers.
+		
+		Customer[] custArray = new Customer[customers];
+		double[] totals = new double[customers];
+		
+	// Creates an object of the customers and saves their last name, 
+	// first name char, and customer number, as well as putting their items in the "list" (Item[])
+//		custArray[0] = new Customer(scan.next().charAt(0), scan.next(), scan.nextInt());
+		for(int i = 0; i < customers; i++) {
+			custArray[i] = new Customer(scan.next().charAt(0), scan.next(), scan.nextInt());
+				for (int o = 0; o < custArray[i].custNum; o++) {
+					custArray[i].list[o] = new Item(scan.nextInt(), scan.next(), scan.nextDouble());
+				}
+		}
+		
+		for (int i = 0; i < customers; i++) {
+			for (int o = 0; o < custArray[i].custNum; o++) {
+				totals[i] = totals[i] + (custArray[i].list[o].price * custArray[i].list[o].amount);
+			}
+		}
+	
+		for (int i = 0; i < customers; i++ ) {
+			System.out.println(custArray[i].fName + ". " + custArray[i].lName + ": " + totals[i]);
+		}
+		
+		
+		
+		
+		
+		scan.close();
 	}
+	
+	// The class I created for the customer, which holds L. name, F. Name, Items, customer number.
+	
+	public static class Customer {
+		char fName;
+		String lName;
+		int custNum;
+		Item[] list = new Item[3];
+		
+		Customer( char a, String b, int c) {
+			this.fName = a;
+			this.lName = b;
+			this.custNum = c;
+		}
+		
+		
+	}
+	
+	// The class for the items that they buy, which 
+	
+	public static class Item {
+		String name;
+		double price;
+		int amount;
+		
+		
+		Item( int c, String a, double b) {
+			this.name = a;
+			this.price = b;
+			this.amount = c;
+		}
+	}
+	
+	// Method created to make customers from inputs received by the scanners.
+	// Contains the first char, last name, customer number, which is what's given in the inputs.
+	
+	static Customer custMaker() {
+		Scanner scan = new Scanner(System.in);
+		char fName = scan.nextLine().charAt(0);
+		String lName = scan.nextLine();
+		int num = scan.nextInt();
+		Customer cust = new Customer(fName, lName, num);
+		cust.list = new Item[num];
+		scan.close();
+		
+		return cust;
+		
+	}
+	
 }
