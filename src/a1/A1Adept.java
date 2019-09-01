@@ -100,9 +100,9 @@ public class A1Adept {
 		
 		// Print statements for each of the lines needed, IE Biggest, Smallest, Average.
 		System.out.println("Biggest: " + Biggest.fName + " " + Biggest.lName 
-				+ "(" + df.format(Biggest.total) + ")");
+				+ " (" + df.format(Biggest.total) + ")");
 		System.out.println("Smallest: " + Smallest.fName + " " + Smallest.lName +
-				"(" + df.format(Smallest.total) + ")");
+				" (" + df.format(Smallest.total) + ")");
 		System.out.println("Average: " + df.format(Average));
 		
 		
